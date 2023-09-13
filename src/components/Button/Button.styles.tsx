@@ -1,14 +1,25 @@
 import styled from 'styled-components'
+import { Base } from '../../styles/Variables'
+import { Flex } from '../../pages/Home.styles'
 
-export const ButtonContainer = styled.button`
-    padding: 0.5rem 1rem;
+interface IButtonPropsStyles {
+    bgColor?: string
+}
+
+export const ButtonContainer = styled(Flex) <IButtonPropsStyles>`
+    background: ${(props) => {
+        return props.bgColor === 'light' ? `${Base.gray_100}` : `${Base.gray_300}`
+    }};
+
+    color: ${(props) => {
+        return props.bgColor === 'light' ? `${Base.gray_400}` : `${Base.gray_100}`
+    }};
+    padding: 0.5rem 1.3rem;
+    font-size: 1.3rem;
     border-radius: 0.5rem;
     border: none;
-    display: flex;
-    align-items: center;
     gap: 1rem;
-    background: #6f0e0e;
-    color: #FFF;
+    border: 1px solid ${Base.gray_200};
     cursor: pointer;
     height: 3.5rem;
 `
