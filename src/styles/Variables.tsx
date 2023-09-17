@@ -18,18 +18,6 @@ export const Feedback = {
     success: '#2F723D',
 }
 
-export const Support = {
-    pink: '#DB5BBF',
-    orange: '#E07B67',
-    yellow: '#BB9F3A',
-    green: '#8CAD51',
-    blue: '#7B94CB',
-    pink_dark: '#251622',
-    orange_dark: '#261A17',
-    yellow_dark: '#211E12',
-    green_dark: '#1C2015',
-    blue_dark: '#1C2015'
-}
 
 function createTextStyle(size: string, lineHeight: string, weight: string) {
     return { size, lineHeight, weight }

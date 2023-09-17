@@ -11,8 +11,7 @@ export default function Button({ text, icon, color }: IButtonProps) {
         <ButtonContainer
             bgColor={color}
         >
-            {text}
-            {icon}
+            {text} {icon}
         </ButtonContainer>
     )
 }
