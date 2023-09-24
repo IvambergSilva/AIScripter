@@ -14,6 +14,15 @@ const colorStatus = {
     execute: `${Base.gray_100}`
 }
 
+const cursorStatus = {
+    waiting: 'pointer',
+    success: 'not-allowed',
+    uploading: 'not-allowed',
+    generating: 'not-allowed',
+    converting: 'not-allowed',
+    execute: 'pointer',
+}
+
 const IconSpin = keyframes`
     0% {
         transform: rotate(0deg);
@@ -31,7 +40,9 @@ export const ButtonContainer = styled.button<IButtonPropsStyles>`
     }};
     color:${Base.gray_400};
     cursor: ${(props) => {
-        return props.status !== 'waiting' ? 'not-allowed' : 'pointer'
+        if (props.status !== undefined) {
+            return cursorStatus[props.status]
+        }
     }};
     display: flex;
     align-items: center;

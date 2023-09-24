@@ -144,7 +144,7 @@ export const Textarea = styled.div`
         height: 100%;
         color: ${Base.gray_100};
         line-height: 160%;
-        box-shadow: inset 1px 1px 1px #FFF;
+
         &:focus {
             border: 1px solid ${Highlight.purple_light};
         }
