@@ -2,7 +2,6 @@
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/IvambergSilva/AIScripter-web?style=for-the-badge)
 ![GitHub language count](https://img.shields.io/github/languages/count/IvambergSilva/AIScripter-web?style=for-the-badge)
-![GitHub forks](https://img.shields.io/github/forks/IvambergSilva/AIScripter-web?style=for-the-badge)
 
 ### Ilustração:
 
