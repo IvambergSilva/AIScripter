@@ -6,6 +6,8 @@
 
 ### Ilustração:
 
+<p>Segue abaixo uma demonstração da aplicação. O que achou? 😍</p>
+
 <img src="/src/assets/images/aiscripter-demo.gif" alt="Exemplo de imagem da aplicação">
 
 <hr><br>
@@ -18,6 +20,8 @@
 ## 🚀 BackEnd
 
 <p>Segue o link com o repositório do backend: <a href="" target="_blank">Clique aqui</a></p>
+
+<hr><br>
 
 ## 💻 Linguagens, Bibliotecas e Ferramentas
 
