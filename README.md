@@ -1,4 +1,4 @@
-## AIScripter
+## AIScripter-FrontEnd
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/IvambergSilva/AIScripter-web?style=for-the-badge)
 ![GitHub language count](https://img.shields.io/github/languages/count/IvambergSilva/AIScripter-web?style=for-the-badge)
@@ -18,7 +18,7 @@
 
 ## 🚀 BackEnd
 
-<p>Segue o link com o repositório do backend: <a href="" target="_blank">Clique aqui</a></p>
+<p>Segue o link com o repositório do backend: <a href="https://github.com/IvambergSilva/AIScripter-web" target="_blank">Clique aqui</a></p>
 
 <hr><br>
 
