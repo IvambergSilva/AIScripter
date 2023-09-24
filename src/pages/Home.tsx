@@ -1,18 +1,28 @@
 import Button from "../components/Button/Button";
-
-import { Github, FileVideo, Upload, Wand2, ChevronsUpDown } from 'lucide-react'
-import { HeaderContainer, HomeContainer, MainContainer, Options, Prompts, Range, Select, Separator, Textarea, VideoContainer } from "./Home.styles";
+import { Github } from 'lucide-react'
+import { HeaderContainer, HomeContainer, MainContainer, Range, Select, Separator, Textarea } from "./Home.styles";
+import VideoInputForm from "../components/VideoInputForm/VideoInputForm";
+import PromptSelect from "../components/PromptSelect/PromptSelect";
+import Link from "../components/Link/Link";
 import { useState } from "react";
+import { useCompletion } from 'ai/react'
 
 export default function Home() {
-    const [handlePrompts, sethandlePrompts] = useState(true)
 
-    const promptOptions = [
-        { id: '1', text: 'Título do vídeo' },
-        { id: '2', text: 'Descrição do vídeo' },
-    ]
+    const [temperature, setTemperature] = useState(0.5)
 
-    const [prompt, setPrompt] = useState('Selecione um prompt...')
+    const [videoId, setVideoId] = useState<string | null>(null)
+
+    const { input, setInput, handleInputChange, handleSubmit, completion, isLoading } = useCompletion({
+        api: 'http://localhost:3333/ai/complete',
+        body: {
+            videoId,
+            temperature,
+        },
+        headers: {
+            'Content-type': 'application/json'
+        }
+    })
 
     return (
         <HomeContainer>
@@ -24,7 +34,11 @@ export default function Home() {
                         width='3.5'
                         direction="vertical"
                     />
-                    <Button text='GitHub' icon={<Github />} />
+                    <Link 
+                        text="GitHub"
+                        icon={<Github />} 
+                        link="https://github.com/IvambergSilva"
+                    />
                 </div>
             </HeaderContainer>
             <MainContainer>
@@ -32,62 +46,32 @@ export default function Home() {
                     <div>
                         <Textarea>
                             <textarea
-                                name="" id=""
-                                placeholder="Inclua o prompt para a IA..."></textarea>
+                                placeholder="Inclua o prompt para a IA..."
+                                value={input}
+                                onChange={handleInputChange}
+                            ></textarea>
                         </Textarea>
                         <Textarea>
                             <textarea
-                                name="" id=""
-                                placeholder="Resultado gerado pela IA..." readOnly
+                                placeholder="Resultado gerado pela IA..."
+                                readOnly
+                                value={completion}
                             ></textarea>
                         </Textarea>
                     </div>
                     <p>Lembre-se: você tem a opção de utilizar a variável <code>{'{transcription}'}</code> no seu prompt para acrescentar o conteúdo da transcrição do vídeo escolhido.</p>
                 </article>
                 <aside>
-                    <form>
-                        <VideoContainer htmlFor="video">
-                            <FileVideo />
-                            Selecione um vídeo
-                            <input type="file" name="video" id="video" accept="video/mp4" hidden />
-                        </VideoContainer>
+                    <VideoInputForm
+                        onVideoUploaded={setVideoId}
+                    />
 
+                    <form onSubmit={handleSubmit}>
                         <Separator />
 
-                        <section>
-                            <label htmlFor="transcriptionPrompt">Prompt de transcrição</label>
-
-                            <textarea name="transcriptionPrompt" id="transcription_prompt" placeholder="Inclua palavras-chaves mencionadas no vídeo separadas por vírgulas (,)."></textarea>
-
-                            <Button
-                                text="Carregar vídeo"
-                                icon={<Upload />}
-                                color='light'
-                            />
-                        </section>
-
-                        <Separator />
-
-                        <section>
-                            <label htmlFor="transcriptionPrompt">Prompt</label>
-
-                            <Select
-                                onClick={() => sethandlePrompts(!handlePrompts)}
-                            >
-                                <p>{prompt}</p>
-                                <p><ChevronsUpDown size={14} /></p>
-
-                                {handlePrompts && <Options>
-                                    {promptOptions.map((category) => {
-                                        return (
-                                            <Prompts
-                                                onClick={() => setPrompt(category.text)}
-                                            >{category.text}</Prompts>
-                                        )
-                                    })}
-                                </Options>}
-                            </Select>
-                        </section>
+                        <PromptSelect
+                            onPromptSelected={setInput}
+                        />
 
                         <Separator />
 
@@ -106,17 +90,22 @@ export default function Home() {
                         <section>
                             <Range>
                                 <label htmlFor="">Temperatura</label>
-                                <input type="range" name="temperature" id="temperature" min={0} max={1} step={0.1} />
+                                <input
+                                    type="range"
+                                    name="temperature"
+                                    id="temperature"
+                                    value={temperature}
+                                    min={0} max={1} step={0.1}
+                                    onChange={(e) => setTemperature(Number(e.target.value))}
+                                />
                                 <span>Valores mais altos tendem a deixar o resultado mais criativo e com possíveis erros.</span>
                             </Range>
                         </section>
 
                         <Separator />
-
                         <Button
-                            text="Executar"
-                            icon={<Wand2 size={16} />}
-                            color='light'
+                            text='Executar'
+                            status={isLoading ? 'generating' : 'execute'}
                         />
                     </form>
                 </aside>

@@ -1,17 +1,32 @@
+import { ArrowUpToLine, Check, Loader, RefreshCcw, Upload, Wand2 } from "lucide-react";
 import { ButtonContainer } from "./Button.styles";
 
 interface IButtonProps {
     text: string
-    icon?: React.ReactNode
-    color?: string
+    status?: "waiting" | "success" | "converting" | "uploading" | "generating" | "execute" | undefined;
 }
 
-export default function Button({ text, icon, color }: IButtonProps) {
+const iconSize = 16
+
+const iconStatus = {
+    waiting: <Upload size={iconSize} />,
+    converting: <RefreshCcw size={iconSize} />,
+    uploading: <ArrowUpToLine size={iconSize} />,
+    generating: <Loader size={iconSize} />,
+    success: <Check size={iconSize}/>,
+    execute: <Wand2 size={iconSize} />
+}
+
+export default function Button({ text, status }: IButtonProps) {
+    status === undefined ? status = 'waiting' : status
+
     return (
         <ButtonContainer
-            bgColor={color}
+            type="submit"
+            status={status}
         >
-            {text} {icon}
+            {text}
+            <span>{iconStatus[status]}</span>
         </ButtonContainer>
     )
 }
