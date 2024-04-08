@@ -59,7 +59,7 @@ No diretório do projeto, você pode executar:
 
 <hr><br>
 
-## 🤝 Colaborador
+## 🤝 Autor
 
 <table>
   <tr>
